@@ -42,13 +42,16 @@ class Pipeline
             DB::commit();
           }
 
-          return $data;
+          return $data->setStatus($data::TRAVELER_SUCCESS)
+            ->setMessage('Traveler passed successfully.');
         });
     } catch (\Exception $exception) {
       if ($useDatabaseTransactions) {
         DB::rollBack();
       }
-      throw $exception;
+      return $data->setStatus($data::TRAVELER_FAIL)
+        ->setMessage($exception->getMessage())
+        ->setException($exception);
     }
   }
 }
