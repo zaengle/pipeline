@@ -20,6 +20,7 @@ class Pipeline
   {
     $this->app = $app;
   }
+
   /**
    * @param $data
    * @param array $pipes
@@ -42,16 +43,21 @@ class Pipeline
             DB::commit();
           }
 
-          return $data->setStatus($data::TRAVELER_SUCCESS)
-            ->setMessage('Traveler passed successfully.');
+          return $data instanceof AbstractTraveler
+            ? $data->setStatus($data::TRAVELER_SUCCESS)->setMessage('Traveler passed successfully.')
+            : $data;
         });
     } catch (\Exception $exception) {
       if ($useDatabaseTransactions) {
         DB::rollBack();
       }
-      return $data->setStatus($data::TRAVELER_FAIL)
-        ->setMessage($exception->getMessage())
-        ->setException($exception);
+      if ($data instanceof AbstractTraveler) {
+        return $data->setStatus($data::TRAVELER_FAIL)
+          ->setMessage($exception->getMessage())
+          ->setException($exception);
+      }
+
+      throw $exception;
     }
   }
 }
