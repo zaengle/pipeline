@@ -1,6 +1,6 @@
 <?php
 
-namespace Zaengle\Pipeline;
+namespace Zaengle\Pipeline\Contracts;
 
 /**
  * Class AbstractTraveler.
