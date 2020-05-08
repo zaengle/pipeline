@@ -4,6 +4,7 @@ namespace Zaengle\Pipeline;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\DB;
+use Zaengle\Pipeline\Contracts\AbstractTraveler;
 
 class Pipeline
 {
