@@ -45,7 +45,7 @@ class Pipeline
           }
 
           return $data instanceof AbstractTraveler
-            ? $data->setStatus($data::TRAVELER_SUCCESS)->setMessage('Traveler passed successfully.')
+            ? $data->setStatus($data::TRAVELER_SUCCESS)
             : $data;
         });
     } catch (\Exception $exception) {

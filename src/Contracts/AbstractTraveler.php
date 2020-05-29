@@ -20,7 +20,7 @@ abstract class AbstractTraveler
   /**
    * @var string
    */
-  protected $message;
+  protected $message = 'Traveler passed successfully.';
 
   /**
    * @var \Exception
