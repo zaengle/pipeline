@@ -15,7 +15,7 @@ _FYI - See the "Example" directory for a more thorough example._
 
 ## Basic Class Example
 
-A pipeline is a common pattern that separates data, from logic, from responses and exceptions. **Zaengle Pipeline** abstracts these parts into helpful classes and gives some structure to the underlying pattern. 
+A pipeline is a common pattern for breaking data, logic, and response/exceptions into three distinct elements. **Zaengle Pipeline** abstracts these parts into helpful classes and gives some structure to the underlying pattern. 
 
 ```php
 <?php
