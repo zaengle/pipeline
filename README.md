@@ -11,7 +11,7 @@ This package adds niceties on top of the Laravel Pipeline and consolidates them 
 _FYI - See the "Example" directory for a more thorough example._ 
 
 ## Installation
-`composer require zaengle\pipeline`
+`composer require zaengle/pipeline`
 
 ## Basic Class Example
 
