@@ -165,3 +165,7 @@ A string that is available upon the completion of the pipeline.
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+## Credits
+
+- [Header Image](https://www.flickr.com/photos/nasacommons/4858567220/)
