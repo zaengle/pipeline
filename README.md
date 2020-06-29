@@ -156,7 +156,7 @@ To abort the process you may throw an exception which Pipeline will capture on t
 
 *`$response->setMessage()`*
 
-A `$message` property will automatically be set in the case of an exception. Otherwise you can set it at any point during the pipeline execution.
+A `$message` property will automatically be set in the case of an exception. Otherwise, you can set it at any point during the pipeline execution.
 
 *`$response->getMessage()`*
 
