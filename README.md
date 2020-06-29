@@ -1,9 +1,9 @@
-![apollo launch control](apollo-launch.jpg)
 ![Tests](https://github.com/zaengle/pipeline/workflows/Tests/badge.svg)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/zaengle/pipeline.svg?style=flat-square)](https://packagist.org/packages/zaengle/pipeline)
 [![Total Downloads](https://img.shields.io/packagist/dt/zaengle/pipeline.svg?style=flat-square)](https://packagist.org/packages/zaengle/pipeline)
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 
+![apollo launch control](apollo-launch.jpg)
 
 # Zaengle Pipeline
 After using Laravel Pipelines to [handle complex data flows](https://zaengle.com/blog/handling-complex-data-flows) in our projects we saw a few patterns emerge:
