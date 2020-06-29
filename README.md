@@ -17,115 +17,128 @@ _FYI - See the "Example" directory for a more thorough example._
 
 A pipeline is a common pattern that separates data, from logic, from responses and exceptions. **Zaengle Pipeline** abstracts these parts into helpful classes and gives some structure to the underlying pattern. 
 
-    <?php
-    
-    namespace Zaengle\Pipeline\Example;
-    
-    use Zaengle\Pipeline\Example\Pipes\ExamplePipe;
-    use Zaengle\Pipeline\Pipeline;
-    
-    class ExamplePipeline {
-        public function __invoke() 
-        {
-            $traveler = (new ExampleTraveler())
-            
-            $pipes = [
-              ExamplePipe::class,
-            ];
+```php
+<?php
+
+namespace Zaengle\Pipeline\Example;
+
+use Zaengle\Pipeline\Example\Pipes\ExamplePipe;
+use Zaengle\Pipeline\Pipeline;
+
+class ExamplePipeline {
+    public function __invoke() 
+    {
+        $traveler = (new ExampleTraveler());
         
-            $response = app(Pipeline::class)->pipe($traveler, $pipes, $useTransactions = true);
-        
-            if ($response->passed()) {
-              // Handle pass
-            } else {
-              // Handle fail
-              // $response->getException();
-              // $response->getMessage();
-              // $response->getStatus();
-            }
+        $pipes = [
+          ExamplePipe::class,
+        ];
+    
+        $response = app(Pipeline::class)->pipe($traveler, $pipes, $useTransactions = true);
+    
+        if ($response->passed()) {
+          // Handle pass
+        } else {
+          // Handle fail
+          // $response->getException();
+          // $response->getMessage();
+          // $response->getStatus();
         }
     }
+}
+```
     
 ## Breaking it Down
 
 #### Create a Traveler
 
 The first step in using the Zaengle Pipeline is to create a Data Traveler class. 
-    
-    $traveler = (new ExampleTraveler())
-        ->setDemoData([ 'name' => 'Zaengle Pipeline' ]);
+```php
+$traveler = (new ExampleTraveler())
+    ->setDemoData([ 'name' => 'Zaengle Pipeline' ]);
+```
 
 While not required, by extending `Zaengle\Pipeline\Contracts\AbstractTraveler` you will inherit additional methods utilized in the `Zaengle\Pipeline\Pipeline` class.
 
-    <?php
-    
-    namespace Zaengle\Pipeline\Example;
-    
-    use Zaengle\Pipeline\Contracts\AbstractTraveler;
-    
-    class ExampleTraveler extends AbstractTraveler {
-    }
+```php
+<?php
+
+namespace Zaengle\Pipeline\Example;
+
+use Zaengle\Pipeline\Contracts\AbstractTraveler;
+
+class ExampleTraveler extends AbstractTraveler {
+}
+```
 
 Within the `$traveler` you may set any data required and it will be available within any of the pipes.
 
-    class ExampleTraveler extends AbstractTraveler {
-      private $demoData;
-    
-      public function getDemoData()
-      {
-        return $this->demoData;
-      }
-    
-      public function setDemoData($demoData)
-      {
-        $this->demoData = $demoData;
-    
-        return $this;
-      }
-    }
+```php
+class ExampleTraveler extends AbstractTraveler {
+  private $demoData;
+
+  public function getDemoData()
+  {
+    return $this->demoData;
+  }
+
+  public function setDemoData($demoData)
+  {
+    $this->demoData = $demoData;
+
+    return $this;
+  }
+}
+```
 
 #### Pipes
 
 Separate your business logic into appropriate "pipes" each of which should implement the `Zaengle\Pipeline\Contracts\PipeInterface`.
 
-    <?php
-    
-    namespace Zaengle\Pipeline\Example\Pipes;
-    
-    use Zaengle\Pipeline\Contracts\PipeInterface;
-    
-    class ExamplePipe implements PipeInterface
-    {
-      public function handle($traveler, \Closure $next)
-      {
-        // Run your application logic here
-        return $next($traveler);
-      }
-    }
+```php
+<?php
+
+namespace Zaengle\Pipeline\Example\Pipes;
+
+use Zaengle\Pipeline\Contracts\PipeInterface;
+
+class ExamplePipe implements PipeInterface
+{
+  public function handle($traveler, \Closure $next)
+  {
+    // Run your application logic here
+    return $next($traveler);
+  }
+}
+```
 
 #### Primary Pipeline
 Once you have your data and pipes established, send them through the `Zaengle\Pipeline\Pipeline` `->pipe()` method. 
 
 `pipe()` accepts three parameters, two of which are required. The first parameter should be your `$traveler`, the second is your array of pipes, and the third, optional parameter tells `Pipeline` whether to use transactions or not.
 
-    // use Zaengle\Pipeline\Pipeline;
-    
-    $response = app(Pipeline::class)->pipe($traveler, $pipes, $useTransactions = true);
+```php
+// use Zaengle\Pipeline\Pipeline;
+
+$response = app(Pipeline::class)->pipe($traveler, $pipes, $useTransactions = true);
+```
 
 #### Results
 Assuming the traveler extends `AbstractTraveler`, after sending the `$traveler` through the data pipes you will have access to a `->passed()` method which indicates whether the pipeline completed successfully or not. 
 
-    $response = app(Pipeline::class)->pipe($traveler, $pipes, $useTransactions = true);
+```php
+$response = app(Pipeline::class)->pipe($traveler, $pipes, $useTransactions = true);
 
-    if ($response->passed()) {
-      // Handle pass
-      dump($response->getMessage());
-    } else {
-      // Handle fail
-      // $response->getException();
-      // $response->getMessage();
-      // $response->getStatus();
-    }
+if ($response->passed()) {
+  // Handle pass
+  dump($response->getMessage());
+} else {
+  // Handle fail
+  // $response->getException();
+  // $response->getMessage();
+  // $response->getStatus();
+}
+```
 
 Extending `AbstractTraveler` also grants you access to the following convenience methods:
 
