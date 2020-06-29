@@ -1,6 +1,8 @@
 {
   "name": "zaengle/pipeline",
-  "description": "A package to manage pipelines",
+  "description": "Niceties on top of Laravel Pipelines",
+  "license": "MIT",
+  "keywords": ["laravel", "pipeline"],
   "authors": [
     {
       "name": "Zaengle",
