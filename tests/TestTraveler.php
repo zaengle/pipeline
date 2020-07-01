@@ -7,6 +7,6 @@ use Zaengle\Pipeline\Contracts\AbstractTraveler;
 /**
  * Class TestTraveler.
  */
-class TestTraveler extends AbstractTraveler {
-
+class TestTraveler extends AbstractTraveler
+{
 }
