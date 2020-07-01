@@ -9,28 +9,28 @@ use Orchestra\Testbench\TestCase;
  */
 class PipelineTestCase extends TestCase
 {
-  protected function setUp(): void
-  {
-    parent::setUp();
-  }
+    protected function setUp(): void
+    {
+        parent::setUp();
+    }
 
-  /**
-   * @param \Illuminate\Foundation\Application $app
-   *
-   * @return array
-   */
-  protected function getPackageProviders($app)
-  {
-    return [\Zaengle\Pipeline\ServiceProvider::class];
-  }
+    /**
+     * @param \Illuminate\Foundation\Application $app
+     *
+     * @return array
+     */
+    protected function getPackageProviders($app)
+    {
+        return [\Zaengle\Pipeline\ServiceProvider::class];
+    }
 
-  /**
-   * @param \Illuminate\Foundation\Application $app
-   *
-   * @return array
-   */
-  protected function getPackageAliases($app)
-  {
-    return ['Pipeline' => 'Zaengle\Pipeline\Facade'];
-  }
+    /**
+     * @param \Illuminate\Foundation\Application $app
+     *
+     * @return array
+     */
+    protected function getPackageAliases($app)
+    {
+        return ['Pipeline' => 'Zaengle\Pipeline\Facade'];
+    }
 }

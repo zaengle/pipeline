@@ -9,11 +9,11 @@ use Zaengle\Pipeline\Contracts\PipeInterface;
  */
 class TestPipe implements PipeInterface
 {
-  /**
-   * @inheritDoc
-   */
-  public function handle($traveler, \Closure $next)
-  {
-    return $next($traveler);
-  }
+    /**
+     * {@inheritdoc}
+     */
+    public function handle($traveler, \Closure $next)
+    {
+        return $next($traveler);
+    }
 }

@@ -9,13 +9,13 @@ use Zaengle\Pipeline\Contracts\PipeInterface;
  */
 class FailedTestPipe implements PipeInterface
 {
-  /**
-   * @inheritDoc
-   */
-  public function handle($traveler, \Closure $next)
-  {
-    throw new \Exception('This Pipe Has Failed!!!');
+    /**
+     * {@inheritdoc}
+     */
+    public function handle($traveler, \Closure $next)
+    {
+        throw new \Exception('This Pipe Has Failed!!!');
 
-    return $next($traveler);
-  }
+        return $next($traveler);
+    }
 }
