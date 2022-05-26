@@ -23,7 +23,7 @@ class ExampleTraveler extends AbstractTraveler
     }
 
     /**
-     * @param mixed $demoData
+     * @param  mixed  $demoData
      * @return ExampleTraveler
      */
     public function setDemoData($demoData)

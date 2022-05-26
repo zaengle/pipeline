@@ -27,7 +27,7 @@ abstract class AbstractTraveler
     protected $exception;
 
     /**
-     * @param mixed $status
+     * @param  mixed  $status
      * @return AbstractTraveler
      */
     public function setStatus($status)
@@ -46,7 +46,7 @@ abstract class AbstractTraveler
     }
 
     /**
-     * @param mixed $message
+     * @param  mixed  $message
      * @return AbstractTraveler
      */
     public function setMessage($message)
@@ -65,7 +65,7 @@ abstract class AbstractTraveler
     }
 
     /**
-     * @param mixed $exception
+     * @param  mixed  $exception
      * @return AbstractTraveler
      */
     public function setException($exception)

@@ -15,7 +15,8 @@ class Pipeline
 
     /**
      * Pipeline constructor.
-     * @param Application $app
+     *
+     * @param  Application  $app
      */
     public function __construct(Application $app)
     {
@@ -24,9 +25,10 @@ class Pipeline
 
     /**
      * @param $data
-     * @param array $pipes
-     * @param bool $useDatabaseTransactions
+     * @param  array  $pipes
+     * @param  bool  $useDatabaseTransactions
      * @return mixed
+     *
      * @throws \Exception
      */
     public function pipe($data, array $pipes, $useDatabaseTransactions = false)
