@@ -9,13 +9,13 @@ use Zaengle\Pipeline\Contracts\PipeInterface;
  */
 class ExamplePipe implements PipeInterface
 {
-  /**
-   * @inheritDoc
-   */
-  public function handle($traveler, \Closure $next)
-  {
-    dump($traveler->getName());
+    /**
+     * @inheritDoc
+     */
+    public function handle($traveler, \Closure $next)
+    {
+        dump($traveler->getName());
 
-    return $next($traveler);
-  }
+        return $next($traveler);
+    }
 }
