@@ -9,7 +9,7 @@ interface PipeInterface
 {
     /**
      * @param $traveler
-     * @param \Closure $next
+     * @param  \Closure  $next
      * @return mixed
      */
     public function handle($traveler, \Closure $next);
