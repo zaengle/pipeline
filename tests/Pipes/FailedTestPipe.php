@@ -2,20 +2,15 @@
 
 namespace Zaengle\Pipeline\Tests\Pipes;
 
+use Closure;
+use Zaengle\Pipeline\Contracts\AbstractTraveler;
 use Zaengle\Pipeline\Contracts\PipeInterface;
+use Zaengle\Pipeline\Tests\TestTraveler;
 
-/**
- * Class FailedTestPipe.
- */
 class FailedTestPipe implements PipeInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function handle($traveler, \Closure $next)
+    public function handle(TestTraveler|AbstractTraveler $traveler, Closure $next): AbstractTraveler
     {
         throw new \Exception('This Pipe Has Failed!!!');
-
-        return $next($traveler);
     }
 }

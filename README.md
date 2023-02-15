@@ -65,7 +65,7 @@ The first step in using the Zaengle Pipeline is to create a Data Traveler class.
 $traveler = (new RegisterTraveler())->setRequest(request()->all());
 ```
 
-While not required, by extending `Zaengle\Pipeline\Contracts\AbstractTraveler` you will inherit additional methods utilized in the `Zaengle\Pipeline\Pipeline` class.
+`Zaengle\Pipeline\Contracts\AbstractTraveler` provides additional methods utilized in the `Zaengle\Pipeline\Pipeline` class.
 
 ```php
 <?php
@@ -122,7 +122,7 @@ use App\User;
 use Zaengle\Pipeline\Contracts\PipeInterface;
 
 class CreateUser implements PipeInterface {
-    public function handle($traveler, \Closure $next)
+    public function handle(RegisterTraveler|AbstractTraveler $traveler, \Closure $next): RegisterTraveler
     {
         $traveler->setUser(
             User::create([
@@ -144,7 +144,7 @@ use Zaengle\Pipeline\Contracts\PipeInterface;
 
 class HandleMailingList implements PipeInterface
 {
-    public function handle($traveler, \Closure $next)
+    public function handle(RegisterTraveler|AbstractTraveler $traveler, \Closure $next): RegisterTraveler
     {
         if ($traveler->getRequest()->subscribe) {
             MailingService::subscribe($traveler->getUser()->email);
@@ -171,7 +171,7 @@ $response = app(Pipeline::class)->pipe($traveler, $pipes, $useTransactions = tru
 ```
 
 #### Results
-Assuming the traveler extends `AbstractTraveler`, after sending the `$traveler` through the data pipes you will have access to a `->passed()` method which indicates whether the pipeline completed successfully or not. 
+After sending the `$traveler` through the data pipes you will have access to a `->passed()` method which indicates whether the pipeline completed successfully or not. 
 
 ```php
 $response = app(Pipeline::class)->pipe($traveler, $pipes, $useTransactions = true);
@@ -187,7 +187,7 @@ if ($response->passed()) {
 }
 ```
 
-Extending `AbstractTraveler` also grants you access to the following convenience methods:
+`AbstractTraveler` grants you access to the following convenience methods:
 
  *`$response->passed()`*
  

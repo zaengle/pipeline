@@ -2,91 +2,57 @@
 
 namespace Zaengle\Pipeline\Contracts;
 
-/**
- * Class AbstractTraveler.
- */
+use Exception;
+
 abstract class AbstractTraveler
 {
     const TRAVELER_SUCCESS = 'ok';
 
     const TRAVELER_FAIL = 'fail';
 
-    /**
-     * @var string
-     */
-    protected $status;
+    protected string $status;
 
-    /**
-     * @var string
-     */
-    protected $message = 'Traveler passed successfully.';
+    protected string $message = 'Traveler passed successfully.';
 
-    /**
-     * @var \Exception
-     */
-    protected $exception;
+    protected ?Exception $exception = null;
 
-    /**
-     * @param  mixed  $status
-     * @return AbstractTraveler
-     */
-    public function setStatus($status)
+    public function setStatus(string $status): AbstractTraveler
     {
         $this->status = $status;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getStatus()
+    public function getStatus(): string
     {
         return $this->status;
     }
 
-    /**
-     * @param  mixed  $message
-     * @return AbstractTraveler
-     */
-    public function setMessage($message)
+    public function setMessage(string $message): AbstractTraveler
     {
         $this->message = $message;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getMessage()
+    public function getMessage(): string
     {
         return $this->message;
     }
 
-    /**
-     * @param  mixed  $exception
-     * @return AbstractTraveler
-     */
-    public function setException($exception)
+    public function setException(Exception $exception): AbstractTraveler
     {
         $this->exception = $exception;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getException()
+    public function getException(): ?Exception
     {
         return $this->exception;
     }
 
-    /**
-     * @return bool
-     */
-    public function passed()
+    public function passed(): bool
     {
         return $this->getStatus() === self::TRAVELER_SUCCESS;
     }

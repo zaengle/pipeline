@@ -3,10 +3,8 @@
 namespace Zaengle\Pipeline\Tests;
 
 use Orchestra\Testbench\TestCase;
+use Zaengle\Pipeline\ServiceProvider;
 
-/**
- * Class PipelineTestCase.
- */
 class PipelineTestCase extends TestCase
 {
     protected function setUp(): void
@@ -14,20 +12,12 @@ class PipelineTestCase extends TestCase
         parent::setUp();
     }
 
-    /**
-     * @param  \Illuminate\Foundation\Application  $app
-     * @return array
-     */
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
-        return [\Zaengle\Pipeline\ServiceProvider::class];
+        return [ServiceProvider::class];
     }
 
-    /**
-     * @param  \Illuminate\Foundation\Application  $app
-     * @return array
-     */
-    protected function getPackageAliases($app)
+    protected function getPackageAliases($app): array
     {
         return ['Pipeline' => 'Zaengle\Pipeline\Facade'];
     }

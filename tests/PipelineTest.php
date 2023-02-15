@@ -7,9 +7,6 @@ use Zaengle\Pipeline\Pipeline;
 use Zaengle\Pipeline\Tests\Pipes\FailedTestPipe;
 use Zaengle\Pipeline\Tests\Pipes\TestPipe;
 
-/**
- * Class PipelineTest.
- */
 class PipelineTest extends PipelineTestCase
 {
     /** @test */
@@ -64,29 +61,27 @@ class PipelineTest extends PipelineTestCase
     public function it_uses_db_transactions_on_a_failed_run()
     {
         DB::shouldReceive('beginTransaction')
-      ->once()
-      ->andReturnSelf()
-      ->shouldReceive('rollback')
-      ->once();
+          ->once()
+          ->andReturnSelf()
+          ->shouldReceive('rollback')
+          ->once();
 
         app(Pipeline::class)->pipe(
-      new TestTraveler(),
-      [FailedTestPipe::class],
-      true
-    );
+          new TestTraveler(),
+          [FailedTestPipe::class],
+          true
+        );
     }
 
     /** @test */
-    public function it_works_with_vanilla_travelers()
+    public function it_does_not_work_with_vanilla_travelers()
     {
+        $this->expectException(\TypeError::class);
+
         $traveler = new \stdClass();
 
-        $pipes = [
-            TestPipe::class,
-        ];
+        $pipes = [TestPipe::class];
 
         $response = app(Pipeline::class)->pipe($traveler, $pipes);
-
-        $this->assertSame($traveler, $response);
     }
 }
