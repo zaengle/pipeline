@@ -17,7 +17,7 @@ class Pipeline
     }
 
     /**
-     * @param  AbstractTraveler $data
+     * @param  AbstractTraveler  $data
      * @param  array  $pipes
      * @param  bool  $useDatabaseTransactions
      * @return AbstractTraveler
