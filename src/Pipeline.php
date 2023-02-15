@@ -2,36 +2,29 @@
 
 namespace Zaengle\Pipeline;
 
+use Exception;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\DB;
 use Zaengle\Pipeline\Contracts\AbstractTraveler;
 
 class Pipeline
 {
-    /**
-     * @var Application
-     */
-    private $app;
+    private Application $app;
 
-    /**
-     * Pipeline constructor.
-     *
-     * @param  Application  $app
-     */
     public function __construct(Application $app)
     {
         $this->app = $app;
     }
 
     /**
-     * @param $data
+     * @param  AbstractTraveler $data
      * @param  array  $pipes
      * @param  bool  $useDatabaseTransactions
-     * @return mixed
+     * @return AbstractTraveler
      *
      * @throws \Exception
      */
-    public function pipe($data, array $pipes, $useDatabaseTransactions = false)
+    public function pipe(AbstractTraveler $data, array $pipes, bool $useDatabaseTransactions = false): AbstractTraveler
     {
         try {
             if ($useDatabaseTransactions) {
@@ -39,28 +32,23 @@ class Pipeline
             }
 
             return $this->app->make(\Illuminate\Pipeline\Pipeline::class)
-        ->send($data)
-        ->through($pipes)
-        ->then(function ($data) use ($useDatabaseTransactions) {
-            if ($useDatabaseTransactions) {
-                DB::commit();
-            }
+                ->send($data)
+                ->through($pipes)
+                ->then(function ($data) use ($useDatabaseTransactions) {
+                    if ($useDatabaseTransactions) {
+                        DB::commit();
+                    }
 
-            return $data instanceof AbstractTraveler
-            ? $data->setStatus($data::TRAVELER_SUCCESS)
-            : $data;
-        });
-        } catch (\Exception $exception) {
+                    return $data->setStatus($data::TRAVELER_SUCCESS);
+                });
+        } catch (Exception $exception) {
             if ($useDatabaseTransactions) {
                 DB::rollBack();
             }
-            if ($data instanceof AbstractTraveler) {
-                return $data->setStatus($data::TRAVELER_FAIL)
-          ->setMessage($exception->getMessage())
-          ->setException($exception);
-            }
 
-            throw $exception;
+            return $data->setStatus($data::TRAVELER_FAIL)
+              ->setMessage($exception->getMessage())
+              ->setException($exception);
         }
     }
 }

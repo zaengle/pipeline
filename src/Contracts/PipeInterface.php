@@ -2,15 +2,9 @@
 
 namespace Zaengle\Pipeline\Contracts;
 
-/**
- * Interface PipeInterface.
- */
+use Closure;
+
 interface PipeInterface
 {
-    /**
-     * @param $traveler
-     * @param  \Closure  $next
-     * @return mixed
-     */
-    public function handle($traveler, \Closure $next);
+    public function handle(AbstractTraveler $traveler, Closure $next): AbstractTraveler;
 }

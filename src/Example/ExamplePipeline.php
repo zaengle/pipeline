@@ -5,17 +5,14 @@ namespace Zaengle\Pipeline\Example;
 use Zaengle\Pipeline\Example\Pipes\ExamplePipe;
 use Zaengle\Pipeline\Pipeline;
 
-/**
- * Class Example.
- */
 class ExamplePipeline
 {
     public function __invoke()
     {
         $traveler = (new ExampleTraveler())
-      ->setDemoData([
-          'name' => 'Zaengle',
-      ]);
+            ->setDemoData([
+                'name' => 'Zaengle',
+            ]);
 
         $pipes = [
             ExamplePipe::class,
@@ -27,9 +24,9 @@ class ExamplePipeline
             // Handle pass
         } else {
             // Handle fail
-      // $response->getException();
-      // $response->getMessage();
-      // $response->getStatus();
+            // $response->getException();
+            // $response->getMessage();
+            // $response->getStatus();
         }
     }
 }
