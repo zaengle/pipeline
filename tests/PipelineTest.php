@@ -51,10 +51,10 @@ class PipelineTest extends PipelineTestCase
       ->once();
 
         app(Pipeline::class)->pipe(
-      new TestTraveler(),
-      [TestPipe::class],
-      true
-    );
+            new TestTraveler(),
+            [TestPipe::class],
+            true
+        );
     }
 
     /** @test */
@@ -67,9 +67,9 @@ class PipelineTest extends PipelineTestCase
           ->once();
 
         app(Pipeline::class)->pipe(
-          new TestTraveler(),
-          [FailedTestPipe::class],
-          true
+            new TestTraveler(),
+            [FailedTestPipe::class],
+            true
         );
     }
 
