@@ -9,8 +9,7 @@ use Zaengle\Pipeline\Tests\Pipes\TestPipe;
 
 class PipelineTest extends PipelineTestCase
 {
-    /** @test */
-    public function it_successfully_process_a_pipeline()
+    public function test_it_successfully_process_a_pipeline()
     {
         $traveler = (new TestTraveler());
 
@@ -25,8 +24,7 @@ class PipelineTest extends PipelineTestCase
         $this->assertNull($response->getException());
     }
 
-    /** @test */
-    public function it_fails_to_process_a_pipeline()
+    public function test_it_fails_to_process_a_pipeline()
     {
         $traveler = (new TestTraveler());
 
@@ -41,8 +39,7 @@ class PipelineTest extends PipelineTestCase
         $this->assertNotNull($response->getException());
     }
 
-    /** @test */
-    public function it_uses_db_transactions_on_a_successful_run()
+    public function test_it_uses_db_transactions_on_a_successful_run()
     {
         DB::shouldReceive('beginTransaction')
       ->once()
@@ -57,8 +54,7 @@ class PipelineTest extends PipelineTestCase
         );
     }
 
-    /** @test */
-    public function it_uses_db_transactions_on_a_failed_run()
+    public function test_it_uses_db_transactions_on_a_failed_run()
     {
         DB::shouldReceive('beginTransaction')
           ->once()
@@ -73,8 +69,7 @@ class PipelineTest extends PipelineTestCase
         );
     }
 
-    /** @test */
-    public function it_does_not_work_with_vanilla_travelers()
+    public function test_it_does_not_work_with_vanilla_travelers()
     {
         $this->expectException(\TypeError::class);
 
