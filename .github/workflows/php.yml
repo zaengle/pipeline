@@ -30,10 +30,10 @@ jobs:
     name: PHP ${{ matrix.php }} / testbench ${{ matrix.testbench }}
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
     - name: Setup PHP
-      uses: shivammathur/setup-php@v2
+      uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2.37.2
       with:
         php-version: ${{ matrix.php }}
         coverage: none
